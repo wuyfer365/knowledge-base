@@ -114,9 +114,11 @@ h2{{font-size:.95rem;margin:1rem 0 .4rem;color:#333}}
 {proj_cards}
 <h2>☁️ 服务器部署</h2>
 <div class="prow">
-<a href="{SERVER}:5004/" target="_blank" class="pbtn" style="background:#42b983">知识库</a>
 <a href="{SERVER}:5000/" target="_blank" class="pbtn" style="background:#27ae60">记单词</a>
+<a href="{SERVER}:5004/" target="_blank" class="pbtn" style="background:#42b983">知识库</a>
+<a href="{SERVER}:5005/" target="_blank" class="pbtn" style="background:#8b5cf6">护理备考</a>
 <a href="{SERVER}:5212/" target="_blank" class="pbtn" style="background:#06c">网盘中转</a>
+<a href="{SERVER}:8082/" target="_blank" class="pbtn" style="background:#f39c12">熊猫游戏</a>
 </div>
 <h2>💬 各窗口当前动态</h2>
 {dyn_html}

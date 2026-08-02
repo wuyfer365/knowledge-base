@@ -32,13 +32,24 @@ body{font-family:-apple-system,'Segoe UI','Noto Sans SC',sans-serif;background:#
 .empty{text-align:center;padding:3rem;color:#999;font-size:.9rem}
 </style></head><body>
 <div class="header">
-  <a href="http://localhost:5003/dashboard">📊 看板</a>
-  <a href="http://localhost:5003/architecture.html">📐 架构</a>
-  <a href="http://localhost:5003/guide.html">📖 指引</a>
+  <a id="lk_dash">📊 看板</a>
+  <a id="lk_arch">📐 架构</a>
+  <a id="lk_guide">📖 指引</a>
   <span style="padding:6px 14px;border-radius:6px;font-size:.82rem;background:#f0faf5;color:#42b983;font-weight:600">📚 知识库</span>
   <span class="gap"></span>
-  <span style="font-size:.72rem;color:#bbb">localhost:5004</span>
+  <span id="kb_port" style="font-size:.72rem;color:#bbb"></span>
 </div>
+<script>
+// 自适应链接：本机访问用 localhost:5003，服务器访问用 106.53.70.121:5003
+(function(){
+  var local = location.hostname==='localhost'||location.hostname==='127.0.0.1';
+  var base = local ? 'http://localhost:5003' : 'http://106.53.70.121:5003';
+  document.getElementById('lk_dash').href = base + '/dashboard';
+  document.getElementById('lk_arch').href = base + '/architecture.html';
+  document.getElementById('lk_guide').href = base + '/guide.html';
+  document.getElementById('kb_port').textContent = local ? 'localhost:5004' : '服务器共享';
+})();
+</script>
 <div class="body">
 <div class="sidebar" id="s"><div class="empty" style="padding:1rem">加载中...</div></div>
 <div class="main" id="c"><div class="empty">选择左侧分类浏览</div></div>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>项目架构总览</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI','Noto Sans SC',sans-serif;background:#f5f7fa;color:#333}
+.header{background:#fff;border-bottom:1px solid #eef0f4;padding:0 20px;height:48px;display:flex;align-items:center;justify-content:center;position:relative;gap:4px}
+.header a{padding:6px 14px;border-radius:6px;text-decoration:none;font-size:.82rem;color:#555;transition:.1s}
+.header a:hover{background:#f0faf5;color:#42b983}
+.header .port{position:absolute;right:20px;font-size:.72rem;color:#bbb}
+.wrap{max-width:960px;margin:0 auto;padding:24px 20px 40px}
+h1{font-size:1.2rem;color:#2c3e50;margin-bottom:20px;text-align:center}
+.row{display:flex;gap:12px;margin-bottom:14px;justify-content:center}
+.box{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,.06);flex:1;min-width:0}
+.box-title{font-size:.72rem;font-weight:600;color:#999;margin-bottom:8px;letter-spacing:.4px}
+.item{font-size:.85rem;font-weight:600;margin-top:6px}
+.item:first-child{margin-top:0}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.68rem;font-weight:600}
+.sub{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}
+.sub span{font-size:.74rem;color:#666;background:#f5f5f5;padding:1px 6px;border-radius:4px}
+.arrow-row{text-align:center;color:#bbb;font-size:.78rem;padding:1px 0}
+.db-box{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:10px;padding:14px 16px}
+.db-box .col{display:inline-block;vertical-align:top;min-width:180px;margin-right:20px}
+.db-box .col-title{font-size:.72rem;font-weight:600;color:#64748b;margin-bottom:4px}
+.db-box .col div{font-size:.8rem;line-height:1.7;color:#475569}
+</style></head>
+<body>
+<div class="header">
+  <a href="/dashboard">📊 看板</a>
+  <span style="padding:6px 14px;border-radius:6px;font-size:.82rem;background:#f0faf5;color:#42b983;font-weight:600">📐 架构</span>
+  <a href="/guide.html">📖 指引</a>
+  <a href="http://localhost:5004/">📚 知识库</a>
+  <span class="port">localhost:5003</span>
+</div>
+<div class="wrap">
+<h1>📦 项目架构总览</h1>
+
+<!-- 管理员 -->
+<div class="row" style="max-width:320px;margin:0 auto 14px">
+<div class="box" style="text-align:center;background:#eef2ff">
+<div class="box-title">👤 管理员（你）</div>
+<div>
+<span class="tag" style="background:#fee2e2;color:#dc2626">裁决 @user</span>
+<span class="tag" style="background:#dbeafe;color:#2563eb">git push</span>
+<span class="tag" style="background:#dcfce7;color:#16a34a">验收测试</span>
+<span class="tag" style="background:#fef3c7;color:#d97706">云控制台</span>
+</div>
+</div>
+</div>
+<div class="arrow-row">↓ 指令 ↑ 待裁决</div>
+
+<!-- 三个窗口 -->
+<div class="row">
+<div class="box" style="border-top:3px solid #3b82f6">
+<div class="box-title">🟦 量化窗口</div>
+<div class="item">量化交易系统</div><div class="sub"><span>5002</span></div>
+<div class="item">记单词 App</div><div class="sub"><span>5000</span><span>服务器 :5000</span></div>
+<div class="item">Bili-Fetcher</div>
+<div class="item">口播工作站</div><div class="sub"><span>5001</span></div>
+</div>
+<div class="box" style="border-top:3px solid #10b981">
+<div class="box-title">🟩 养老窗口</div>
+<div class="item">安心护理后端</div><div class="sub"><span>8080</span><span>服务器 :8080</span></div>
+<div class="item">安心护理前端</div><div class="sub"><span>uni-app</span></div>
+</div>
+<div class="box" style="border-top:3px solid #8b5cf6">
+<div class="box-title">🟪 记忆窗口</div>
+<div class="item">本地记忆系统</div>
+<div class="item">数学逆向刷题</div><div class="sub"><span>5003</span><span>看板 /dashboard</span></div>
+<div class="item">知识库文档站</div><div class="sub"><span>5004</span></div>
+</div>
+</div>
+
+<div class="arrow-row">↓ mem archive / board / progress</div>
+
+<!-- 共享基础设施 -->
+<div class="row">
+<div class="db-box">
+<div class="box-title" style="text-align:center;color:#64748b">📋 共享基础设施（local-memory）</div>
+<div style="text-align:center;margin-top:8px">
+<div class="col">
+<div class="col-title">🔧 CLI 命令</div>
+<div>archive · query · search<br>board · progress · profile</div>
+</div>
+<div class="col">
+<div class="col-title">🗄️ SQLite 数据库</div>
+<div>board 留言板<br>experience 经验/踩坑<br>knowledge 知识库内容<br>project_profile 项目档案+进度<br>session_archive 对话归档</div>
+</div>
+<div class="col">
+<div class="col-title">📎 Git</div>
+<div>local-memory 自动提交<br>其他项目手动 push</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="arrow-row">↓ 读取 DB 渲染</div>
+
+<!-- 本地 Web -->
+<div class="row" style="max-width:420px;margin:0 auto 14px">
+<div class="box" style="text-align:center;border-top:3px solid #f59e0b">
+<div class="box-title">🟡 本地 Web 服务</div>
+<div><span class="tag" style="background:#fef3c7;color:#d97706">5003</span> 数学刷题 + 看板</div>
+<div style="margin-top:4px"><span class="tag" style="background:#fef3c7;color:#d97706">5004</span> 知识库文档站</div>
+</div>
+</div>
+
+<div class="arrow-row">↓ scp 部署</div>
+
+<!-- 腾讯云 -->
+<div class="row" style="max-width:520px;margin:0 auto">
+<div class="box" style="text-align:center;border-top:3px solid #ef4444">
+<div class="box-title">🔴 腾讯云服务器 106.53.70.121</div>
+<div><span class="tag" style="background:#fee2e2;color:#dc2626">5000</span> 记单词 App</div>
+<div style="margin-top:4px"><span class="tag" style="background:#fee2e2;color:#dc2626">8080</span> 安心护理后端</div>
+<div style="margin-top:4px"><span class="tag" style="background:#fee2e2;color:#dc2626">443</span> murongheyi.cn（备案过渡）</div>
+</div>
+</div>
+</div>
+</body></html>

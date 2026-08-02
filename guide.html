@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta http-equiv="refresh" content="30"><title>操作指引</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI','Noto Sans SC',sans-serif;background:#f0f2f5;padding:0;color:#333}
+.header{background:#fff;border-bottom:1px solid #eef0f4;padding:0 20px;height:48px;display:flex;align-items:center;justify-content:center;position:relative;gap:4px}
+.header a{padding:6px 14px;border-radius:6px;text-decoration:none;font-size:.82rem;color:#555;transition:.1s}
+.header a:hover{background:#f0faf5;color:#42b983}
+.header a.cur{background:#f0faf5;color:#42b983;font-weight:600}
+.header .gap{flex:1}
+.wrap{max-width:720px;margin:0 auto;padding:24px 20px 40px}
+h1{text-align:center;font-size:1.2rem;margin-bottom:16px;color:#2c3e50}
+.nav{display:flex;gap:6px;justify-content:center;margin-bottom:16px}
+.nav a{padding:5px 14px;border-radius:6px;text-decoration:none;font-size:.78rem;background:#fff;color:#555;border:1px solid #ddd;transition:.1s}
+.nav a:hover{background:#f0faf5;color:#42b983}
+.sec{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.sec-title{font-size:.82rem;font-weight:600;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0f0f0}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+td{padding:8px 6px;border-bottom:1px solid #f5f5f5;vertical-align:top;line-height:1.5}
+td:first-child{white-space:nowrap;font-weight:600;width:100px}
+td:nth-child(2){color:#666;width:160px}
+.tag{display:inline-block;font-size:.65rem;padding:1px 6px;border-radius:4px;font-weight:600}
+.tag-red{background:#fee2e2;color:#dc2626}
+.tag-green{background:#dcfce7;color:#16a34a}
+.tag-blue{background:#dbeafe;color:#2563eb}
+.tag-yellow{background:#fef3c7;color:#d97706}
+code{background:#f0f0f0;padding:1px 5px;border-radius:3px;font-size:.78rem}
+.btn{display:inline-block;padding:2px 10px;border-radius:5px;font-size:.75rem;background:#e8f5e9;color:#2e7d32;cursor:pointer;border:none;font-weight:600}
+.btn:hover{background:#c8e6c9}
+</style>
+</head><body>
+<div class="wrap">
+<div class="header">
+  <a href="/dashboard">📊 看板</a>
+  <a href="/architecture.html">📐 架构</a>
+  <span style="padding:6px 14px;border-radius:6px;font-size:.82rem;background:#f0faf5;color:#42b983;font-weight:600">📖 指引</span>
+  <a href="http://localhost:5004/">📚 知识库</a>
+  <span class="port">localhost:5003</span>
+</div>
+<h1>📖 操作指引</h1>
+
+<!-- 需要你介入 -->
+<div class="sec">
+<div class="sec-title" style="color:#dc2626">⚡ 需要你介入的场景</div>
+<table>
+<tr><td>裁决冲突</td><td>留言板出现 @user</td><td>看一下上下文，决定怎么做</td></tr>
+<tr><td>GitHub 推送</td><td>项目完成或你要求提交</td><td><code>cd /d/code/xxx && git push</code></td></tr>
+<tr><td>新项目登记</td><td>启动新项目</td><td>告知哪个窗口负责，记端口</td></tr>
+<tr><td>跨窗口问题</td><td>本窗口搞不定</td><td>留言板 <code>@另一个窗口</code></td></tr>
+<tr><td>验收测试</td><td>AI 说改完了</td><td>亲自点开页面验证</td></tr>
+<tr><td>备案/部署</td><td>涉及生产环境</td><td>你自己操作腾讯云控制台</td></tr>
+<tr><td>项目大盘点</td><td>想整体看进度</td><td><code>mem progress list</code> 或打开看板</td></tr>
+<tr><td>下班存档</td><td>今天没做完</td><td>说"存档"，AI 自动执行</td></tr>
+</table>
+</div>
+
+<!-- AI 专属命令 -->
+<div class="sec">
+<div class="sec-title" style="color:#16a34a">🤖 AI 专属命令（不用你管）</div>
+<table>
+<tr><td>归档对话</td><td><span class="tag tag-green">自动</span></td><td><code>mem archive</code> — 对话原文存入 SQLite</td></tr>
+<tr><td>记录踩坑</td><td><span class="tag tag-green">自动</span></td><td><code>mem experience add</code> — 经验自动入库</td></tr>
+<tr><td>更新进度</td><td><span class="tag tag-green">自动</span></td><td><code>mem progress set</code> — 看板即时刷新</td></tr>
+<tr><td>下班存档</td><td><span class="tag tag-green">一句话</span></td><td>你说"存档" → <code>mem progress save</code> + git 提交</td></tr>
+<tr><td>本地提交</td><td><span class="tag tag-green">自动</span></td><td>完成或存档时自动 git commit</td></tr>
+<tr><td>知识库刷新</td><td><span class="tag tag-green">自动</span></td><td>数据入库后页面刷新即同步</td></tr>
+<tr><td>留言通知</td><td><span class="tag tag-green">自动</span></td><td>进度更新自动发 board 通知其他窗口</td></tr>
+</table>
+</div>
+
+<!-- 常用命令速查 -->
+<div class="sec">
+<div class="sec-title" style="color:#2563eb">🔧 常用命令速查</div>
+<table>
+<tr><td>项目完成</td><td colspan="2"><code>mem progress set --project &lt;ID&gt; --status &lt;状态&gt; --desc &lt;描述&gt; --window &lt;窗口&gt;</code></td></tr>
+<tr><td>下班存档</td><td colspan="2"><code>mem progress save --project &lt;ID&gt; --done &lt;完成&gt; --todo &lt;待办&gt; --window &lt;窗口&gt;</code></td></tr>
+<tr><td>看进度</td><td colspan="2"><code>mem progress list</code></td></tr>
+<tr><td>发留言</td><td colspan="2"><code>mem board post "消息" --sender 窗口名</code></td></tr>
+<tr><td>查记忆</td><td colspan="2"><code>mem search 关键词</code></td></tr>
+<tr><td>看项目总览</td><td colspan="2"><code>cat project_overview.md</code></td></tr>
+</table>
+</div>
+
+<!-- 服务启动 -->
+<div class="sec">
+<div class="sec-title" style="color:#8b5cf6">🚀 服务启动命令（点击启动）</div>
+<div id="start-msg" style="font-size:.78rem;color:#999;margin-bottom:6px;min-height:1.2em"></div>
+<table>
+<tr><td style="width:40px">5000</td><td style="white-space:nowrap">记单词 App</td><td><code style="font-size:.72rem">python d:/code/recite-app/server.py</code></td><td style="width:50px;text-align:right"><span class="btn" id="btn-5000" onclick="toggleService(5000)">▶</span></td></tr>
+<tr><td>5001</td><td style="white-space:nowrap">口播工作站</td><td><code style="font-size:.72rem">python d:/code/voice-workstation/app.py</code></td><td style="text-align:right"><span class="btn" id="btn-5001" onclick="toggleService(5001)">▶</span></td></tr>
+<tr><td>5002</td><td style="white-space:nowrap">量化看板</td><td><code style="font-size:.72rem">python -m src.web.app</code></td><td style="text-align:right"><span class="btn" id="btn-5002" onclick="toggleService(5002)">▶</span></td></tr>
+<tr><td>5003</td><td style="white-space:nowrap">数学刷题 + 看板</td><td><code style="font-size:.72rem">python d:/code/math-inverse/server.py</code></td><td style="text-align:right"><span class="btn" id="btn-5003" onclick="toggleService(5003)">▶</span></td></tr>
+<tr><td>5004</td><td style="white-space:nowrap">知识库</td><td><code style="font-size:.72rem">python d:/code/knowledge-base/server.py</code></td><td style="text-align:right"><span class="btn" id="btn-5004" onclick="toggleService(5004)">▶</span></td></tr>
+<tr><td>5005</td><td style="white-space:nowrap">护理备考</td><td><code style="font-size:.72rem">python d:/code/nursing-memory/server.py</code></td><td style="text-align:right"><span class="btn" id="btn-5005" onclick="toggleService(5005)">▶</span></td></tr>
+</table>
+<div style="font-size:.78rem;color:#999;margin-top:8px;display:flex;align-items:center;gap:8px;justify-content:flex-end">
+<span class="btn" style="background:#fee2e2;color:#dc2626" onclick="toggleService(0)">⏹ 全部停止</span>
+</div>
+<div style="font-size:.78rem;color:#999;margin-top:6px;display:flex;align-items:center;gap:6px;justify-content:flex-end">
+<span>权限批准：</span>
+<span class="btn" style="background:#e8f5e9;color:#2e7d32" id="aa-start" onclick="aaStart()">▶ 启动</span>
+<span class="btn" style="background:#fee2e2;color:#dc2626" id="aa-stop" onclick="aaStop()">⏹ 停止</span>
+<span id="aa-status" style="font-size:.72rem;color:#999;margin-left:4px"></span>
+</div>
+<script>
+var aaCheckTimer = null;
+function aaCheck(){
+  fetch('/api/auto-approve-status').then(function(r){return r.json()}).then(function(d){
+    var s=document.getElementById('aa-status');
+    if(d.running){ s.textContent='运行中 (PID '+d.pid+')'; s.style.color='#16a34a'; }
+    else { s.textContent='未运行'; s.style.color='#999'; }
+  });
+}
+function aaStart(){
+  document.getElementById('aa-status').textContent='启动中...'; document.getElementById('aa-status').style.color='#999';
+  fetch('/api/auto-approve/start',{method:'POST'}).then(function(r){return r.json()}).then(function(d){
+    document.getElementById('aa-status').textContent=d.msg;
+    setTimeout(aaCheck,3000);
+  });
+}
+function aaStop(){
+  document.getElementById('aa-status').textContent='停止中...'; document.getElementById('aa-status').style.color='#999';
+  fetch('/api/auto-approve/stop',{method:'POST'}).then(function(r){return r.json()}).then(function(d){
+    document.getElementById('aa-status').textContent=d.msg;
+    setTimeout(aaCheck,3000);
+  });
+}
+aaCheck();
+var PORTS = [5000,5001,5002,5003,5004,5005];
+// 检查各端口状态，更新按钮
+function checkAll(){
+  PORTS.forEach(function(p){
+    fetch('/api/status/'+p).then(function(r){return r.json()}).then(function(d){
+      var btn=document.getElementById('btn-'+p);
+      if(!btn) return;
+      if(d.running){
+        btn.innerHTML='⏹';
+        btn.dataset.mode='stop';
+        btn.style.background='#fee2e2';
+        btn.style.color='#dc2626';
+      }else{
+        btn.innerHTML='▶';
+        btn.dataset.mode='start';
+        btn.style.background='#e8f5e9';
+        btn.style.color='#2e7d32';
+      }
+    });
+  });
+}
+
+function toggleService(port){
+  var msg=document.getElementById('start-msg');
+  if(port===0){
+    msg.style.color='#999'; msg.textContent='⏳ 正在停止所有服务...';
+    var started=Date.now();
+    fetch('/api/start/0',{method:'POST'}).then(function(r){return r.json()}).then(function(d){
+      var elapsed=Date.now()-started;
+      setTimeout(function(){
+        msg.style.color='#16a34a'; msg.textContent='✅ '+d.msg;
+        setTimeout(checkAll,1000);
+      }, Math.max(0, 800-elapsed));
+    });
+    return;
+  }
+  var btn=document.getElementById('btn-'+port);
+  var isStop=btn&&btn.dataset.mode==='stop';
+  var url=isStop?'/api/stop/'+port:'/api/start/'+port;
+  msg.style.color='#999';
+  msg.textContent=isStop?'停止中...':'启动中...';
+  fetch(url,{method:'POST'}).then(function(r){return r.json()}).then(function(d){
+    msg.style.color=d.ok?'#16a34a':'#dc2626';
+    msg.textContent=d.msg;
+    setTimeout(checkAll,1500);
+  });
+}
+
+checkAll();
+setInterval(checkAll,5000);
+</script>
+</div>
+
+<div style="text-align:center;font-size:.72rem;color:#ccc;margin-top:16px">各窗口 CLAUDE.md 有完整命令列表和自动规则</div>
+</div>
+</body></html>

@@ -84,6 +84,7 @@ code{background:#f0f0f0;padding:1px 5px;border-radius:3px;font-size:.78rem}
 <!-- 服务启动 -->
 <div class="sec">
 <div class="sec-title" style="color:#8b5cf6">🚀 服务启动命令（点击启动）</div>
+<div style="font-size:.78rem;color:#e67e22;margin-bottom:6px" id="local-only-note">⚠️ 以下为本机(笔记本)服务启动，仅笔记本本机可用；台式机/服务器仅查看不可操作</div>
 <div id="start-msg" style="font-size:.78rem;color:#999;margin-bottom:6px;min-height:1.2em"></div>
 <table>
 <tr><td style="width:40px">5000</td><td style="white-space:nowrap">记单词 App</td><td><code style="font-size:.72rem">python d:/code/recite-app/server.py</code></td><td style="width:50px;text-align:right"><span class="btn" id="btn-5000" onclick="toggleService(5000)">▶</span></td></tr>
@@ -150,6 +151,12 @@ function checkAll(){
 
 function toggleService(port){
   var msg=document.getElementById('start-msg');
+  // 非本机访问（服务器/台式机）：只读，禁止操作
+  if(location.hostname!=='localhost'&&location.hostname!=='127.0.0.1'){
+    msg.style.color='#e67e22';
+    msg.textContent='⚠️ 服务启动仅笔记本本机可用';
+    return;
+  }
   if(port===0){
     msg.style.color='#999'; msg.textContent='⏳ 正在停止所有服务...';
     var started=Date.now();
@@ -176,6 +183,18 @@ function toggleService(port){
 
 checkAll();
 setInterval(checkAll,5000);
+
+// 非本机访问（服务器/台式机）：服务按钮全部置灰禁用
+(function(){
+  if(location.hostname!=='localhost'&&location.hostname!=='127.0.0.1'){
+    var btns=document.querySelectorAll('.btn');
+    for(var i=0;i<btns.length;i++){
+      btns[i].style.pointerEvents='none';
+      btns[i].style.opacity='0.4';
+      btns[i].style.cursor='not-allowed';
+    }
+  }
+})();
 </script>
 </div>
 

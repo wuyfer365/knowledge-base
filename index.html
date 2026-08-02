@@ -56,6 +56,7 @@ fetch('/api/knowledge-data').then(function(r){ return r.json(); }).then(function
   html+='<div class="i l1" onclick="sel(this);showPit(\'all\')">全部踩坑</div>';
   html+='<div class="sec" style="margin-top:.5rem">经验总结</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'exp_claude\',\'Claude架构\')">Claude Code 运行逻辑</div>';
+  html+='<div class="i l2" onclick="sel(this);showMd(\'exp_claude_arch\',\'Claude运行架构\')">Claude Code 运行架构</div>';
   html+='<div class="sec" style="margin-top:.5rem">技术栈集</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'ts_git\',\'Git\')">Git</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'ts_flask\',\'Flask\')">Flask / Python</div>';

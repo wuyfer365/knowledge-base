@@ -34,8 +34,8 @@ code{background:#f0f0f0;padding:1px 5px;border-radius:3px;font-size:.78rem}
   <a href="/dashboard">📊 看板</a>
   <a href="/architecture.html">📐 架构</a>
   <span style="padding:6px 14px;border-radius:6px;font-size:.82rem;background:#f0faf5;color:#42b983;font-weight:600">📖 指引</span>
-  <a href="http://localhost:5004/">📚 知识库</a>
-  <span class="port">localhost:5003</span>
+  <a href="http://localhost:5004/" id="lk_kb">📚 知识库</a>
+  <span class="port" id="port">localhost:5003</span>
 </div>
 <h1>📖 操作指引</h1>
 
@@ -121,6 +121,13 @@ code{background:#f0f0f0;padding:1px 5px;border-radius:3px;font-size:.78rem}
 <span id="aa-status" style="font-size:.72rem;color:#999;margin-left:4px"></span>
 </div>
 <script>
+// 自适应主机：本机访问用 localhost，服务器访问用 106.53.70.121
+(function(){
+  var local = location.hostname==='localhost'||location.hostname==='127.0.0.1';
+  var host = local ? 'localhost' : '106.53.70.121';
+  document.getElementById('lk_kb').href = 'http://' + host + ':5004/';
+  document.getElementById('port').textContent = host + ':5003';
+})();
 var aaCheckTimer = null;
 function aaCheck(){
   fetch('/api/auto-approve-status').then(function(r){return r.json()}).then(function(d){

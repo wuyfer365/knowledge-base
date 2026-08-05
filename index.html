@@ -64,7 +64,7 @@ fetch('/api/knowledge-data').then(function(r){ return r.json(); }).then(function
   var html='<div class="sec">项目实战</div>';
   D.projects.forEach(function(p){
     var pid=p.project, name=p.name||pid;
-    html+='<div class="i l1" onclick="sel(this);showMd(\''+pid+'\',\''+name+'\')">'+name+'</div>';
+    html+='<div class="i l1" onclick="sel(this);showMd(\''+pid+'\',\''+name+'\')">'+name+'<span class="arr" style="float:right" onclick="event.stopPropagation();toggleCat(this.parentNode,\'l1\')">▾</span></div>';
     html+='<div class="i l2" onclick="sel(this);showMd(\''+pid+'\',\''+name+'\')">项目概述</div>';
     html+='<div class="i l2" onclick="sel(this);showPit(\''+pid+'\')">踩坑记录</div>';
   });
@@ -124,12 +124,13 @@ fetch('/api/knowledge-data').then(function(r){ return r.json(); }).then(function
   window._E = D.experiences;
 });
 function sel(el){document.querySelectorAll('.sidebar .i').forEach(function(x){x.classList.remove('active')});el.classList.add('active');}
-function toggleCat(el){
+function toggleCat(el, stop){
   var arr = el.querySelector('.arr');
   var collapsed = el.getAttribute('data-c');
   var sib = el.nextElementSibling;
+  var stopCls = stop || 'cat';
   while(sib){
-    if(sib.classList.contains('cat') || sib.classList.contains('sec')) break;
+    if(sib.classList.contains(stopCls) || sib.classList.contains('sec')) break;
     sib.style.display = collapsed ? '' : 'none';
     sib = sib.nextElementSibling;
   }

@@ -41,7 +41,7 @@ def api_data():
         db.row_factory = sqlite3.Row
         for r in db.execute("SELECT project,name,description FROM project_profile ORDER BY project").fetchall():
             p.append(dict(r))
-        for r in db.execute("SELECT window,date,problem,root_cause,solution,tech_stack,project FROM experience ORDER BY date DESC LIMIT 200").fetchall():
+        for r in db.execute("SELECT window,date,problem,root_cause,solution,tech_stack,project,strategy FROM experience ORDER BY date DESC LIMIT 200").fetchall():
             e.append(dict(r))
         for r in db.execute("SELECT node_id,title,content FROM knowledge").fetchall():
             k.append(dict(r))

@@ -1,33 +1,36 @@
 @echo off
-title Sync guide.html (Dashboard)
+title Sync dashboard pages (guide + architecture)
 echo ==========================================
-echo   Sync guide.html: Local + Server
+echo   Sync dashboard pages: Local + Server
 echo ==========================================
 echo.
 
-set "SRC=D:\code\knowledge-base\guide.html"
-set "DST_MT=D:\code\math-inverse\guide.html"
+set "KB=D:\code\knowledge-base"
+set "MT=D:\code\math-inverse"
 set "SRV=root@106.53.70.121"
-set "DST_SRV=/opt/knowledge-base/guide.html"
+set "DST=/opt/knowledge-base"
 
-echo [1/3] Copy to math-inverse\guide.html ...
-copy /Y "%SRC%" "%DST_MT%" >nul
+echo [1/3] Copy guide.html + architecture.html to math-inverse ...
+copy /Y "%KB%\guide.html" "%MT%\guide.html" >nul
+if errorlevel 1 goto FAIL_COPY
+copy /Y "%KB%\architecture.html" "%MT%\architecture.html" >nul
 if errorlevel 1 goto FAIL_COPY
 echo   [OK]
 
-echo [2/3] Upload to %SRV% ...
-scp -q "%SRC%" %SRV%:%DST_SRV% 2>nul
+echo [2/3] Upload both to server ...
+scp -q "%KB%\guide.html" %SRV%:%DST%/guide.html 2>nul
+if errorlevel 1 goto FAIL_SCP
+scp -q "%KB%\architecture.html" %SRV%:%DST%/architecture.html 2>nul
 if errorlevel 1 goto FAIL_SCP
 echo   [OK]
 
 echo [3/3] Verify on server ...
-ssh -o BatchMode=yes %SRV% "ls -la %DST_SRV%" 2>nul
+ssh -o BatchMode=yes %SRV% "ls -la %DST%/guide.html %DST%/architecture.html" 2>nul
 
 echo.
 echo ==========================================
-echo   DONE. All aligned:
+echo   DONE. guide.html + architecture.html synced
 echo     - localhost:5003  math-inverse
-echo     - knowledge-base  source
 echo     - server 5003/5004
 echo ==========================================
 echo.

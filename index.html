@@ -17,7 +17,9 @@ body{font-family:-apple-system,'Segoe UI','Noto Sans SC',sans-serif;background:#
 .sidebar .i.active{color:#42b983;border-left-color:#42b983;background:#f0faf5;font-weight:600}
 .sidebar .i.l2{padding-left:2rem;font-size:.8rem;color:#666}
 .sidebar .i.l3{padding-left:2.8rem;font-size:.75rem;color:#777}
-.sidebar .cat{padding:.25rem 1rem;font-size:.72rem;font-weight:600;color:#16a34a;margin-top:.3rem}
+.sidebar .cat{padding:.25rem 1rem;font-size:.72rem;font-weight:600;color:#16a34a;margin-top:.3rem;cursor:pointer;user-select:none}
+.sidebar .cat:hover{color:#059669}
+.sidebar .arr{display:inline-block;width:14px;color:#bbb;font-size:.7rem}
 .sidebar .cat-sub{padding:.2rem 1rem .2rem 1.7rem;font-size:.7rem;font-weight:600;color:#4b5563}
 .main{flex:1;padding:2rem;overflow-y:auto;max-width:860px}
 .main h1{font-size:1.5rem;color:#2c3e50;margin-bottom:.3rem}
@@ -69,7 +71,7 @@ fetch('/api/knowledge-data').then(function(r){ return r.json(); }).then(function
   html+='<div class="sec" style="margin-top:.5rem">踩坑百科</div>';
   html+='<div class="i l1" onclick="sel(this);showPit(\'all\')">全部踩坑</div>';
   html+='<div class="sec" style="margin-top:.5rem">读书笔记</div>';
-  html+='<div class="cat">📖 哲学</div>';
+  html+='<div class="cat" onclick="toggleCat(this)"><span class="arr">▾</span>📖 哲学</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_zhexueshi\',\'哲学史地图\')">《西方哲学史地图》骨架</div>';
   html+='<div class="cat-sub">罗素《西方哲学史》</div>';
   html+='<div class="i l3" onclick="sel(this);showMd(\'bk_luosu\',\'罗素总览\')">总览与读法</div>';
@@ -82,14 +84,14 @@ fetch('/api/knowledge-data').then(function(r){ return r.json(); }).then(function
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_being_time\',\'存在与时间\')">《存在与时间》海德格尔</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_wuyantonglun\',\'物演通论\')">《物演通论》递弱代偿</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_geb\',\'集异璧\')">《集异璧》GEB</div>';
-  html+='<div class="cat">📚 文学</div>';
+  html+='<div class="cat" onclick="toggleCat(this)"><span class="arr">▾</span>📚 文学</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_santi\',\'三体\')">《三体》三部曲</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_shituoguo\',\'狮驼国\')">《西游记之狮驼国》</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_shituoguo_ch9\',\'证法解读\')">第九章「师徒证法」解读</div>';
-  html+='<div class="cat">🧒 亲子教育</div>';
+  html+='<div class="cat" onclick="toggleCat(this)"><span class="arr">▾</span>🧒 亲子教育</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_shukezhanbei\',\'舌战贝塔\')">《舒克舌战贝塔》说理课</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_shukezhanbei_debate\',\'辩论课\')">《舒克舌战贝塔》辩论课</div>';
-  html+='<div class="cat">🤖 AI 方法论</div>';
+  html+='<div class="cat" onclick="toggleCat(this)"><span class="arr">▾</span>🤖 AI 方法论</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'bk_self_distill\',\'自我蒸馏\')">《如何蒸馏自己》</div>';
   html+='<div class="sec" style="margin-top:.5rem">答疑解惑</div>';
   html+='<div class="i l2" onclick="sel(this);showMd(\'qa_cpp_pointer\',\'C++指针\')">C++ 指针 vs Java 引用</div>';
@@ -122,6 +124,21 @@ fetch('/api/knowledge-data').then(function(r){ return r.json(); }).then(function
   window._E = D.experiences;
 });
 function sel(el){document.querySelectorAll('.sidebar .i').forEach(function(x){x.classList.remove('active')});el.classList.add('active');}
+function toggleCat(el){
+  var arr = el.querySelector('.arr');
+  var collapsed = el.getAttribute('data-c');
+  var sib = el.nextElementSibling;
+  while(sib){
+    if(sib.classList.contains('cat') || sib.classList.contains('sec')) break;
+    sib.style.display = collapsed ? '' : 'none';
+    sib = sib.nextElementSibling;
+  }
+  if(collapsed){
+    el.removeAttribute('data-c'); if(arr) arr.textContent = '▾';
+  } else {
+    el.setAttribute('data-c','1'); if(arr) arr.textContent = '▸';
+  }
+}
 function showMd(pid,name){
   var main=document.getElementById('c');
   var k=(window._K||[]).find(function(x){ return x.node_id==='pa_'+pid||x.node_id==='pt_'+pid||x.node_id===pid; });
